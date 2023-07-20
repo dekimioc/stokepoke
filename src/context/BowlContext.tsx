@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { Bowl } from '../types/types';
+import { Bowl } from '../types';
 import axios from 'axios';
 
 type BowlContextType = {

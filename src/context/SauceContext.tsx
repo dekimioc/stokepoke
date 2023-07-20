@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { createContext } from 'react';
-import { Sauce, Size } from '../types';
+import React, { useEffect, useState, createContext } from 'react';
+import { Sauce } from '../types';
 import axios from 'axios';
 
 type SauceContextType = {

@@ -58,17 +58,16 @@ export const TabBar = ({ state, descriptors, navigation }: any) => {
         };
 
         return (
-          <TouchableOpacity
+          <StyledTabBar
             accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
             testID={options.tabBarTestID}
             onPress={onPress}
-            onLongPress={onLongPress}
-            style={{ flex: 1 }}>
+            onLongPress={onLongPress}>
             {icon}
             <StyledText isFocused={isFocused}>{label}</StyledText>
-          </TouchableOpacity>
+          </StyledTabBar>
         );
       })}
     </View>
@@ -78,5 +77,15 @@ export const TabBar = ({ state, descriptors, navigation }: any) => {
 const StyledText = styled.Text<{ isFocused: boolean }>(
   ({ theme, isFocused }) => `
   color: ${isFocused ? theme.colors.secondary : theme.colors.primary}
+`
+);
+
+const StyledTabBar = styled.TouchableOpacity(
+  ({ theme }) => `
+  height: 70px;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background: ${theme.colors.background};
 `
 );

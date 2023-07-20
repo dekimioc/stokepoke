@@ -19,13 +19,13 @@ const StyledSafeAreaView = styled.SafeAreaView(
   ({ theme }) => `
     flex: 1;
     padding: ${theme.spacing.spacing15};
-    background-color: ${theme.colors.backgroundPrimary}
+    background-color: ${theme.colors.backgroundPrimary};
 `
 );
 
 const StyledScrollView = styled.ScrollView(
   ({ theme }) => `
     padding: ${theme.spacing.spacing30} ${theme.spacing.spacing15};
-    background-color: ${theme.colors.backgroundPrimary}
+    background-color: ${theme.colors.backgroundPrimary};
 `
 );

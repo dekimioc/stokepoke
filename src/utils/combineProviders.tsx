@@ -1,5 +1,11 @@
 import { ComponentProps, ComponentType, FC } from 'react';
-import { BowlProvider } from '../context/BowlContext';
+import {
+  BaseProvider,
+  BowlProvider,
+  SauceProvider,
+  SizeProvider,
+  IngredientsProvider,
+} from '../context';
 import { ThemeProvider } from 'styled-components';
 import { useTheme } from '../hooks';
 
@@ -20,4 +26,11 @@ const combineProviders = (providers: Providers): FC<React.PropsWithChildren> =>
 
 const { theme } = useTheme();
 
-export const AllProviders = combineProviders([[ThemeProvider, { theme }], [BowlProvider]]);
+export const AllProviders = combineProviders([
+  [ThemeProvider, { theme }],
+  [BowlProvider],
+  [SizeProvider],
+  [BaseProvider],
+  [SauceProvider],
+  [IngredientsProvider],
+]);

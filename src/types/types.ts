@@ -1,5 +1,5 @@
 export type Bowl = {
-  id: number;
+  id: string;
   name: string;
   description: string;
   image: {

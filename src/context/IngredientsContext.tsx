@@ -1,10 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { createContext } from 'react';
-import { Ingredients, Sauce } from '../types';
+import React, { useEffect, useMemo, useState, createContext } from 'react';
+import { Ingredient } from '../types';
 import axios from 'axios';
 
 type IngredientsContextType = {
-  ingredients: Ingredients[];
+  ingredients: Ingredient[];
   selectedIngredients: string[];
   setSelectedIngredients: (arg: string[]) => void;
   loading: boolean;
@@ -26,7 +25,7 @@ export const IngredientsContext = createContext<IngredientsContextType>({
 });
 
 export const IngredientsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [ingredients, setIngredients] = useState<Sauce[]>([]);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
   const [error, setError] = useState<string>('');
   const [maximumIngredientsPerSize, setMaximumIngredientsPerSize] = useState<number>(0);

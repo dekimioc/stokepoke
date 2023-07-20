@@ -34,12 +34,12 @@ export type Sauce = {
   description: string;
 };
 
-export type Ingredients = {
+export type Ingredient = {
   id: string;
   name: string;
 };
 
-export type ExtraIngredients = {
+export type ExtraIngredient = {
   id: string;
   name: string;
   currency: string;

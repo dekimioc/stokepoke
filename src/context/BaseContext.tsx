@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { createContext } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 import { Base } from '../types';
 
@@ -24,8 +23,6 @@ export const BaseProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   const [selectedBase, setSelectedBase] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-
-  console.log(bases, 'basesdadada');
 
   const getBases = async () => {
     setLoading(true);

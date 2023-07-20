@@ -1,8 +1,9 @@
 import React from 'react';
+import { ViewStyle } from 'react-native';
 import styled from 'styled-components/native';
 
-export const Box: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return <StyledBox>{children}</StyledBox>;
+export const Box: React.FC<React.PropsWithChildren & ViewStyle> = ({ children, ...rest }) => {
+  return <StyledBox {...rest}>{children}</StyledBox>;
 };
 
 const StyledBox = styled.View(

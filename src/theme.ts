@@ -5,6 +5,7 @@ export const theme = {
     thernary: '#E9E8F8',
     background: '#FFFFFF',
     backgroundPrimary: '#FAFBFF',
+    transparent: 'transparent',
   },
   fontSizes: {
     big: '20px',
@@ -24,6 +25,7 @@ export const theme = {
     spacing30: '30px',
     spacing15: '15px',
     spacing8: '8px',
+    spacing0: '0',
   },
   borderRadius: {
     default: '4px',

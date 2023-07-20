@@ -12,6 +12,6 @@ export const useBowls = () => {
       selectedBowl,
       setSelectedBowl,
     }),
-    [bowls]
+    [bowls, loading, selectedBowl]
   );
 };

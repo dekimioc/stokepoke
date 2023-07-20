@@ -6,15 +6,15 @@ type BowlContextType = {
   bowls: Bowl[];
   loading: boolean;
   error: string;
-  selectedBowl: Bowl | undefined;
-  setSelectedBowl: (arg: Bowl) => void;
+  selectedBowl: string;
+  setSelectedBowl: (arg: string) => void;
 };
 
 export const BowlContext = createContext<BowlContextType>({
   bowls: [],
   loading: false,
   error: '',
-  selectedBowl: undefined,
+  selectedBowl: '',
   setSelectedBowl: function (arg: Bowl): void {
     throw new Error('Function not implemented.');
   },
@@ -28,7 +28,7 @@ export const BowlProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   const [disabledContinueButton, setDisabledContinueButton] = useState<boolean>(false);
 
   console.log(selectedBowl, 'selected');
-  console.log(bowls, 'bowls');
+  // console.log(bowls, 'bowls');
 
   const getBowls = async () => {
     setLoading(true);

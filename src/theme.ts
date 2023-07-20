@@ -6,6 +6,7 @@ export const theme = {
     background: '#FFFFFF',
     backgroundPrimary: '#FAFBFF',
     transparent: 'transparent',
+    gray: '#29283880',
   },
   fontSizes: {
     big: '20px',
@@ -29,6 +30,7 @@ export const theme = {
   },
   borderRadius: {
     default: '4px',
+    full: '100%',
   },
   letterSpacing: {
     default: '-0.4px',

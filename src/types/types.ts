@@ -1,3 +1,5 @@
+import { TouchableOpacityProps } from 'react-native';
+
 export type Bowl = {
   id: string;
   name: string;
@@ -6,6 +8,42 @@ export type Bowl = {
     id: number;
   };
   imagePath: string;
+};
+
+export type Size = {
+  id: string;
+  name: string;
+  description: string;
+  currency: string;
+  price: number;
+};
+
+export type Base = {
+  id: string;
+  name: string;
+  description: string;
+  image: {
+    id: number;
+  };
+  imagePath: string;
+};
+
+export type Sauce = {
+  id: string;
+  name: string;
+  description: string;
+};
+
+export type Ingredients = {
+  id: string;
+  name: string;
+};
+
+export type ExtraIngredients = {
+  id: string;
+  name: string;
+  currency: string;
+  price: number;
 };
 
 export enum ButtonText {
@@ -52,3 +90,8 @@ export type HomeStackParamList = {
   ThirdStep: undefined;
   FourthStep: undefined;
 };
+
+export type ButtonProps = {
+  text: string;
+  withIcon?: boolean;
+} & TouchableOpacityProps;

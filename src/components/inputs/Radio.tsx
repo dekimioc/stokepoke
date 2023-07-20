@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { TouchableOpacityProps } from 'react-native';
 import { useCallback } from 'react';
-import { useTheme } from '../../../hooks';
+import { useTheme } from '../../hooks';
 
 type RadioProps = {
   checked: boolean;
@@ -50,20 +50,19 @@ const Container = styled.TouchableOpacity(
 const Circle = styled.View(
   ({ theme }) => `
     border: 2px solid;
-    border-radius: 100%;
+    border-radius: ${theme.borderRadius.full};
     width: 25px;
     height: 25px;
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
 `
 );
 
 const InnerCircle = styled.View(
   ({ theme }) => `
-      border-radius: 100%;
-      width: 17px;
-      height: 17px;
-      background: red;
+      border-radius: ${theme.borderRadius.full};
+      width: 16px;
+      height: 16px;
   `
 );

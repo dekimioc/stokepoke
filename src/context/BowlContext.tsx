@@ -2,25 +2,34 @@ import { createContext, useEffect, useState } from 'react';
 import { Bowl } from '../types';
 import axios from 'axios';
 
+const bowlDefaults = {
+  id: '',
+  name: '',
+  description: '',
+  image: {
+    id: 0,
+  },
+  imagePath: '',
+};
 type BowlContextType = {
   bowls: Bowl[];
   loading: boolean;
   error: string;
-  selectedBowl: string;
-  setSelectedBowl: (arg: string) => void;
+  selectedBowl: Bowl;
+  setSelectedBowl: (arg: Bowl) => void;
 };
 
 export const BowlContext = createContext<BowlContextType>({
   bowls: [],
   loading: false,
   error: '',
-  selectedBowl: '',
+  selectedBowl: bowlDefaults,
   setSelectedBowl: () => {},
 });
 
 export const BowlProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [bowls, setBowls] = useState<Bowl[]>([]);
-  const [selectedBowl, setSelectedBowl] = useState<string>('');
+  const [selectedBowl, setSelectedBowl] = useState<Bowl>(bowlDefaults);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
   const [disabledContinueButton, setDisabledContinueButton] = useState<boolean>(false);

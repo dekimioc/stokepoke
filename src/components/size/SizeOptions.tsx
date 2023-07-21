@@ -1,20 +1,19 @@
 import { useCallback } from 'react';
-import { useSize } from '../../hooks/useSize';
+import { useSize, useIngredients } from '../../hooks';
 import { Loader } from '../Loader';
 import { Label, Radio } from '../inputs';
 import { FlexColumn } from '../layout';
 import { convertToTwoDecimals, getNumberOfIngredients } from '../../utils';
-import { useIngredients } from '../../hooks/useIngredients';
 import { Size } from '../../types';
 
 export const SizeOptions = () => {
   const { sizes, selectedSize, setSelectedSize, loading } = useSize();
   const { setMaximumIngredientsPerSize } = useIngredients();
 
-  const isChecked = useCallback((id: string) => Boolean(selectedSize === id), [selectedSize]);
+  const isChecked = useCallback((id: string) => Boolean(selectedSize.id === id), [selectedSize]);
 
   const selectSizeHandler = (size: Size) => {
-    setSelectedSize(size.id);
+    setSelectedSize(size);
     setMaximumIngredientsPerSize(getNumberOfIngredients(size.description).number);
   };
 

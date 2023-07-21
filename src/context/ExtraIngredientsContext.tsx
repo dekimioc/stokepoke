@@ -4,8 +4,8 @@ import axios from 'axios';
 
 type ExtraIngredientsContextType = {
   extraIngredients: ExtraIngredient[];
-  selectedExtraIngredients: string[];
-  setSelectedExtraIngredients: (arg: string[]) => void;
+  selectedExtraIngredients: ExtraIngredient[];
+  setSelectedExtraIngredients: (arg: ExtraIngredient[]) => void;
   loading: boolean;
   error: string;
 };
@@ -20,7 +20,7 @@ export const ExtraIngredientsContext = createContext<ExtraIngredientsContextType
 
 export const ExtraIngredientsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [extraIngredients, setExtraIngredients] = useState<ExtraIngredient[]>([]);
-  const [selectedExtraIngredients, setSelectedExtraIngredients] = useState<string[]>([]);
+  const [selectedExtraIngredients, setSelectedExtraIngredients] = useState<ExtraIngredient[]>([]);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 

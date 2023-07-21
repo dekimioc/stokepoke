@@ -7,7 +7,7 @@ import { useBase } from '../../hooks';
 export const BaseOptions = () => {
   const { bases, selectedBase, setSelectedBase, loading } = useBase();
 
-  const isChecked = useCallback((id: string) => Boolean(selectedBase === id), [selectedBase]);
+  const isChecked = useCallback((id: string) => Boolean(selectedBase.id === id), [selectedBase]);
 
   const renderSizes = useCallback(() => {
     if (bases) {
@@ -16,7 +16,7 @@ export const BaseOptions = () => {
           {bases.map((base) => (
             <Radio
               key={base.id}
-              setChecked={() => setSelectedBase(base.id)}
+              setChecked={() => setSelectedBase(base)}
               checked={isChecked(base.id)}>
               <Label checked={isChecked(base.id)}>{base.name}</Label>
             </Radio>

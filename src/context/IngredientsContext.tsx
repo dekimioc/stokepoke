@@ -4,8 +4,8 @@ import axios from 'axios';
 
 type IngredientsContextType = {
   ingredients: Ingredient[];
-  selectedIngredients: string[];
-  setSelectedIngredients: (arg: string[]) => void;
+  selectedIngredients: Ingredient[];
+  setSelectedIngredients: (arg: Ingredient[]) => void;
   loading: boolean;
   error: string;
   maximumIngredientsPerSize: number;
@@ -26,7 +26,7 @@ export const IngredientsContext = createContext<IngredientsContextType>({
 
 export const IngredientsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+  const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
   const [error, setError] = useState<string>('');
   const [maximumIngredientsPerSize, setMaximumIngredientsPerSize] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);

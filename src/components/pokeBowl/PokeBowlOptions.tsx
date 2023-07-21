@@ -8,7 +8,7 @@ import { FlexColumn } from '../layout';
 export const PokeBowlOptions = () => {
   const { setSelectedBowl, selectedBowl, bowls, loading } = useBowls();
 
-  const isChecked = useCallback((id: string) => Boolean(selectedBowl === id), [selectedBowl]);
+  const isChecked = useCallback((id: string) => Boolean(selectedBowl.id === id), [selectedBowl]);
 
   const renderBowls = useCallback(() => {
     if (bowls) {
@@ -17,7 +17,7 @@ export const PokeBowlOptions = () => {
           {bowls.map((bowl) => (
             <Radio
               key={bowl.id}
-              setChecked={() => setSelectedBowl(bowl.id)}
+              setChecked={() => setSelectedBowl(bowl)}
               checked={isChecked(bowl.id)}>
               <Label checked={isChecked(bowl.id)}>{getFirstWord(bowl.name)}</Label>
             </Radio>

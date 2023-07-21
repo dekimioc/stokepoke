@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { useIngredients } from '../../hooks/useIngredients';
+import { useIngredients } from '../../hooks';
 
 export const IngredientsMaximumSelected = () => {
   const { isReachedMaxNumbersOfIngrediants, maximumIngredientsPerSize } = useIngredients();

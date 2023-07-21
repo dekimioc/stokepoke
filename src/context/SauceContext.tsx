@@ -2,17 +2,23 @@ import React, { useEffect, useState, createContext } from 'react';
 import { Sauce } from '../types';
 import axios from 'axios';
 
+const sauceDefaults = {
+  id: '',
+  name: '',
+  description: '',
+};
+
 type SauceContextType = {
   sauces: Sauce[];
-  selectedSauce: string;
-  setSelectedSauce: (arg: string) => void;
+  selectedSauce: Sauce;
+  setSelectedSauce: (arg: Sauce) => void;
   loading: boolean;
   error: string;
 };
 
 export const SauceContext = createContext<SauceContextType>({
   sauces: [],
-  selectedSauce: '',
+  selectedSauce: sauceDefaults,
   setSelectedSauce: () => {},
   loading: false,
   error: '',
@@ -20,7 +26,7 @@ export const SauceContext = createContext<SauceContextType>({
 
 export const SauceProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [sauces, setSauces] = useState<Sauce[]>([]);
-  const [selectedSauce, setSelectedSauce] = useState<string>('');
+  const [selectedSauce, setSelectedSauce] = useState<Sauce>(sauceDefaults);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 

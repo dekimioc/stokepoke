@@ -1,24 +1,31 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { Size } from '../types';
 import axios from 'axios';
+const sizeDefaults = {
+  id: '',
+  name: '',
+  description: '',
+  currency: '',
+  price: 0,
+};
 
 type SizeContentType = {
   sizes: Size[];
-  selectedSize: string;
-  setSelectedSize: (arg: string) => void;
+  selectedSize: Size;
+  setSelectedSize: (arg: Size) => void;
   loading: boolean;
 };
 
 export const SizeContext = createContext<SizeContentType>({
   sizes: [],
-  selectedSize: '',
+  selectedSize: sizeDefaults,
   setSelectedSize: () => {},
   loading: false,
 });
 
 export const SizeProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [sizes, setSizes] = useState<Size[]>([]);
-  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [selectedSize, setSelectedSize] = useState<Size>(sizeDefaults);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 

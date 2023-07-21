@@ -7,13 +7,13 @@ import { useSauce } from '../../hooks';
 export const SauceOptions = () => {
   const { sauces, selectedSauce, setSelectedSauce, loading } = useSauce();
 
-  const isChecked = useCallback((id: string) => Boolean(selectedSauce === id), [selectedSauce]);
+  const isChecked = useCallback((id: string) => Boolean(selectedSauce.id === id), [selectedSauce]);
   const renderSauces = useCallback(() => {
     if (sauces) {
       return sauces.map((sauce) => (
         <Radio
           key={sauce.id}
-          setChecked={() => setSelectedSauce(sauce.id)}
+          setChecked={() => setSelectedSauce(sauce)}
           checked={isChecked(sauce.id)}>
           <Label checked={isChecked(sauce.id)}>{sauce.name}</Label>
         </Radio>

@@ -1,13 +1,7 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { Size } from '../types';
 import axios from 'axios';
-const sizeDefaults = {
-  id: '',
-  name: '',
-  description: '',
-  currency: '',
-  price: 0,
-};
+import { sizeDefaults } from '../defaults';
 
 type SizeContentType = {
   sizes: Size[];

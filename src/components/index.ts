@@ -10,3 +10,8 @@ export * from './base';
 export * from './sauce';
 export * from './MainSelection';
 export * from './ingredients';
+export * from './DishCard';
+export * from './CardTitle';
+export * from './baseCardElements';
+export * from './favouritesCard';
+export * from './CartCard';

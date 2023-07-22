@@ -1,16 +1,7 @@
 import React, { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 import { Base } from '../types';
-
-const baseDefaults = {
-  id: '',
-  name: '',
-  description: '',
-  image: {
-    id: 0,
-  },
-  imagePath: '',
-};
+import { baseDefaults } from '../defaults';
 
 type BaseContentType = {
   bases: Base[];

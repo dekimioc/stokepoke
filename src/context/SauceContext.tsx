@@ -1,12 +1,7 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { Sauce } from '../types';
 import axios from 'axios';
-
-const sauceDefaults = {
-  id: '',
-  name: '',
-  description: '',
-};
+import { sauceDefaults } from '../defaults';
 
 type SauceContextType = {
   sauces: Sauce[];

@@ -70,6 +70,7 @@ export enum Screens {
 export enum Navigators {
   Home = 'Home',
   Cart = 'Cart',
+  Favourites = 'Favourites',
   BottomTabNavigator = 'Bottom Tab Navigator',
 }
 export enum Steps {
@@ -85,13 +86,30 @@ export type CartStackParamList = {
 };
 
 export type HomeStackParamList = {
-  FirstStep: undefined;
+  FirstStep: { dish?: Dish };
   SecondStep: undefined;
   ThirdStep: undefined;
   FourthStep: undefined;
+};
+
+export type FavouritesStackParamList = {
+  Favourites: undefined;
 };
 
 export type ButtonProps = {
   text: string;
   withIcon?: boolean;
 } & TouchableOpacityProps;
+
+export interface Dish {
+  bowl: Bowl;
+  size: Size;
+  base: Base;
+  ingredients: Ingredient[];
+  extraIngredient: ExtraIngredient[];
+  sauce: Sauce;
+}
+
+export interface Cart extends Dish {
+  quantity: number;
+}

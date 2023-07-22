@@ -6,6 +6,7 @@ import {
   SizeProvider,
   IngredientsProvider,
   ExtraIngredientsProvider,
+  DishProvider,
 } from '../context';
 import { ThemeProvider } from 'styled-components';
 import { useTheme } from '../hooks';
@@ -35,4 +36,5 @@ export const AllProviders = combineProviders([
   [SauceProvider],
   [IngredientsProvider],
   [ExtraIngredientsProvider],
+  [DishProvider],
 ]);

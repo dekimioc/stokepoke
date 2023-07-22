@@ -1,16 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
 import { Bowl } from '../types';
 import axios from 'axios';
+import { bowlDefaults } from '../defaults';
 
-const bowlDefaults = {
-  id: '',
-  name: '',
-  description: '',
-  image: {
-    id: 0,
-  },
-  imagePath: '',
-};
 type BowlContextType = {
   bowls: Bowl[];
   loading: boolean;

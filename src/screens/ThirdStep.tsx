@@ -1,5 +1,5 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native';
-import { BodyText, FlexRow, Page, PrimaryButton, SecondaryButton } from '../components';
+import { FlexRow, Page, PrimaryButton, SecondaryButton } from '../components';
 import { ExtraIngredient } from '../components/extraIngredients';
 import { ButtonText, HomeStackParamList, Screens } from '../types';
 
@@ -13,7 +13,7 @@ export const ThirdStep = () => {
         <SecondaryButton text={ButtonText.back} onPress={() => navigation.goBack()} />
         <PrimaryButton
           text={ButtonText.next}
-          onPress={() => navigation.navigate({ name: Screens.ThirdStep, key: Screens.ThirdStep })}
+          onPress={() => navigation.navigate({ name: Screens.FourthStep, key: Screens.FourthStep })}
         />
       </FlexRow>
     </Page>

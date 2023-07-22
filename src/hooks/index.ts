@@ -6,3 +6,4 @@ export * from './usePrice';
 export * from './useSize';
 export * from './useExtraIngredients';
 export * from './useIngredients';
+export * from './useDish';

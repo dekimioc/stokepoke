@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState, createContext } from 'react';
 import { Ingredient } from '../types';
 import axios from 'axios';
+import { ingredientsDefaults } from '../defaults';
 
 type IngredientsContextType = {
   ingredients: Ingredient[];
@@ -14,7 +15,7 @@ type IngredientsContextType = {
 };
 
 export const IngredientsContext = createContext<IngredientsContextType>({
-  ingredients: [],
+  ingredients: ingredientsDefaults,
   selectedIngredients: [],
   setSelectedIngredients: () => {},
   loading: false,
@@ -26,7 +27,7 @@ export const IngredientsContext = createContext<IngredientsContextType>({
 
 export const IngredientsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-  const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
+  const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>(ingredientsDefaults);
   const [error, setError] = useState<string>('');
   const [maximumIngredientsPerSize, setMaximumIngredientsPerSize] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);

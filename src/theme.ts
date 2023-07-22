@@ -31,6 +31,8 @@ export const theme = {
   borderRadius: {
     default: '4px',
     full: '100%',
+    small: '3px',
+    none: '0px',
   },
   letterSpacing: {
     default: '-0.4px',

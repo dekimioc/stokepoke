@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styled from 'styled-components/native';
 
 type BodyText = {
-  text: string;
+  text: string | string[];
 };
 
 export const BodyText: FC<BodyText> = ({ text }) => {

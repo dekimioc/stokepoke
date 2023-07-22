@@ -1,12 +1,21 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useBowls } from '../../hooks';
 import { Label, Radio } from '../inputs';
 import { getFirstWord } from '../../utils';
 import { Loader } from '../Loader';
 import { FlexColumn } from '../layout';
+import { RouteProp, useRoute } from '@react-navigation/native';
+import { HomeStackParamList } from '../../types';
 
 export const PokeBowlOptions = () => {
+  const { params } = useRoute<RouteProp<HomeStackParamList>>();
   const { setSelectedBowl, selectedBowl, bowls, loading } = useBowls();
+
+  useEffect(() => {
+    if (params?.dish) {
+      setSelectedBowl(params.dish.bowl);
+    }
+  }, [params]);
 
   const isChecked = useCallback((id: string) => Boolean(selectedBowl.id === id), [selectedBowl]);
 

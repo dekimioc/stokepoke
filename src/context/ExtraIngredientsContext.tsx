@@ -1,17 +1,18 @@
 import React, { useEffect, createContext, useState } from 'react';
 import { ExtraIngredient } from '../types';
 import axios from 'axios';
+import { extraIngredientsDefaults } from '../defaults';
 
 type ExtraIngredientsContextType = {
   extraIngredients: ExtraIngredient[];
-  selectedExtraIngredients: string[];
-  setSelectedExtraIngredients: (arg: string[]) => void;
+  selectedExtraIngredients: ExtraIngredient[];
+  setSelectedExtraIngredients: (arg: ExtraIngredient[]) => void;
   loading: boolean;
   error: string;
 };
 
 export const ExtraIngredientsContext = createContext<ExtraIngredientsContextType>({
-  extraIngredients: [],
+  extraIngredients: extraIngredientsDefaults,
   selectedExtraIngredients: [],
   setSelectedExtraIngredients: () => {},
   loading: false,
@@ -19,8 +20,9 @@ export const ExtraIngredientsContext = createContext<ExtraIngredientsContextType
 });
 
 export const ExtraIngredientsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [extraIngredients, setExtraIngredients] = useState<ExtraIngredient[]>([]);
-  const [selectedExtraIngredients, setSelectedExtraIngredients] = useState<string[]>([]);
+  const [extraIngredients, setExtraIngredients] =
+    useState<ExtraIngredient[]>(extraIngredientsDefaults);
+  const [selectedExtraIngredients, setSelectedExtraIngredients] = useState<ExtraIngredient[]>([]);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 

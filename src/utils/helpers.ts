@@ -6,6 +6,10 @@ export const convertToTwoDecimals = (str: number) => {
   return str.toFixed(2);
 };
 
+export const lowercaseString = (str: string) => {
+  return str.toLowerCase();
+};
+
 export const getNumberOfIngredients = (str: string) => {
   let matches = str.match(/\d+/g);
   if (matches) {

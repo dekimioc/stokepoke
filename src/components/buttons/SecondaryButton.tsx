@@ -17,6 +17,7 @@ const StyledButton = styled.TouchableOpacity(
     align-items: center;
     border: 1px solid  ${theme.colors.primary};
     flex: 1;
+    justify-content: center
 `
 );
 

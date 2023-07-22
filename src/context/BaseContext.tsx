@@ -1,18 +1,19 @@
 import React, { useEffect, useState, createContext } from 'react';
 import axios from 'axios';
 import { Base } from '../types';
+import { baseDefaults } from '../defaults';
 
 type BaseContentType = {
   bases: Base[];
-  selectedBase: string;
-  setSelectedBase: (arg: string) => void;
+  selectedBase: Base;
+  setSelectedBase: (arg: Base) => void;
   loading: boolean;
   error: string;
 };
 
 export const BaseContext = createContext<BaseContentType>({
   bases: [],
-  selectedBase: '',
+  selectedBase: baseDefaults,
   setSelectedBase: () => {},
   loading: false,
   error: '',
@@ -20,7 +21,7 @@ export const BaseContext = createContext<BaseContentType>({
 
 export const BaseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [bases, setBases] = useState<Base[]>([]);
-  const [selectedBase, setSelectedBase] = useState<string>('');
+  const [selectedBase, setSelectedBase] = useState<Base>(baseDefaults);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
 

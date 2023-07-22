@@ -1,26 +1,28 @@
 import { useCallback } from 'react';
-import { useExtraIngredients } from '../../hooks/useExtraIngredients';
+import { useExtraIngredients } from '../../hooks';
 import { FlexColumn } from '../layout';
 import { Checkbox, Label } from '../inputs';
 import { Loader } from '../Loader';
 import { convertToTwoDecimals } from '../../utils';
+import { ExtraIngredient } from '../../types';
 
 export const ExtraIngredientsOptions = () => {
   const { extraIngredients, selectedExtraIngredients, setSelectedExtraIngredients, loading } =
     useExtraIngredients();
 
   const isChecked = useCallback(
-    (id: string) => Boolean(selectedExtraIngredients.includes(id)),
+    (extraIngredient: ExtraIngredient) =>
+      Boolean(selectedExtraIngredients.includes(extraIngredient)),
     [selectedExtraIngredients]
   );
 
-  const selectExtraIngredientsHandler = (id: string) => {
-    if (selectedExtraIngredients.includes(id)) {
+  const selectExtraIngredientsHandler = (extraIngredient: ExtraIngredient) => {
+    if (selectedExtraIngredients.includes(extraIngredient)) {
       setSelectedExtraIngredients(
-        selectedExtraIngredients.filter((ingredient) => ingredient !== id)
+        selectedExtraIngredients.filter((ingredient) => ingredient.id !== extraIngredient.id)
       );
     } else {
-      setSelectedExtraIngredients([...selectedExtraIngredients, id]);
+      setSelectedExtraIngredients([...selectedExtraIngredients, extraIngredient]);
     }
   };
 
@@ -30,10 +32,10 @@ export const ExtraIngredientsOptions = () => {
         <FlexColumn gap={15}>
           {extraIngredients.map((ingredient) => (
             <Checkbox
-              checked={isChecked(ingredient.id)}
-              setChecked={() => selectExtraIngredientsHandler(ingredient.id)}
+              checked={isChecked(ingredient)}
+              setChecked={() => selectExtraIngredientsHandler(ingredient)}
               key={ingredient.id}>
-              <Label checked={isChecked(ingredient.id)}>{`${ingredient.name} - ${
+              <Label checked={isChecked(ingredient)}>{`${ingredient.name} - ${
                 ingredient.currency
               }${convertToTwoDecimals(ingredient.price)}`}</Label>
             </Checkbox>

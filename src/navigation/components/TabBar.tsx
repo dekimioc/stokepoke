@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { Navigators, Screens } from '../../types';
 import { useTheme } from '../../hooks';
 import styled from 'styled-components/native';
@@ -27,12 +27,12 @@ export const TabBar = ({ state, descriptors, navigation }: any) => {
           case Navigators.Home:
             icon = <HomeIcon color={isFocused ? theme.colors.secondary : theme.colors.primary} />;
             break;
-          case Navigators.Cart:
+          case Navigators.Favourites:
             icon = (
               <FavouriteIcon color={isFocused ? theme.colors.secondary : theme.colors.primary} />
             );
             break;
-          case Screens.Favourites:
+          case Navigators.Cart:
             icon = <CartIcon color={isFocused ? theme.colors.secondary : theme.colors.primary} />;
             break;
         }

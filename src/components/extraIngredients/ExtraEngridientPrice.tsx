@@ -1,17 +1,21 @@
 import { Box, FlexColumn, FlexRow } from '../layout';
 import { BodyText, Header } from '../typography';
+import { convertToTwoDecimals } from '../../utils';
+import { usePrice } from '../../hooks';
 
 export const ExtraIngredientPrice = () => {
+  const { sizePrice, totalPrice } = usePrice();
+
   return (
     <Box marginBottom={30}>
       <FlexColumn gap={20}>
         <FlexRow justifyContent="space-between">
           <BodyText text="Regular price" />
-          <Header text=" $6.99 " />
+          <Header text={`$${convertToTwoDecimals(sizePrice)}`} />
         </FlexRow>
         <FlexRow justifyContent="space-between">
           <BodyText text="Price with extra ingredients" />
-          <Header text="$9.97" />
+          <Header text={`$${convertToTwoDecimals(totalPrice)}`} />
         </FlexRow>
       </FlexColumn>
     </Box>

@@ -3,6 +3,7 @@ import { useIngredients } from '../../hooks/useIngredients';
 import { Loader } from '../Loader';
 import { FlexColumn } from '../layout';
 import { Checkbox, Label } from '../inputs';
+import { Ingredient } from '../../types';
 
 export const IngredientsOptions = () => {
   const {
@@ -15,15 +16,15 @@ export const IngredientsOptions = () => {
   } = useIngredients();
 
   const isChecked = useCallback(
-    (id: string) => Boolean(selectedIngredients.includes(id)),
+    (ingredient: Ingredient) => Boolean(selectedIngredients.includes(ingredient)),
     [selectedIngredients]
   );
 
-  const selectIngredientsHandler = (id: string) => {
-    if (selectedIngredients.includes(id)) {
-      setSelectedIngredients(selectedIngredients.filter((ingredient) => ingredient !== id));
+  const selectIngredientsHandler = (ingredient: Ingredient) => {
+    if (selectedIngredients.includes(ingredient)) {
+      setSelectedIngredients(selectedIngredients.filter((ing) => ing.id !== ingredient.id));
     } else {
-      setSelectedIngredients([...selectedIngredients, id]);
+      setSelectedIngredients([...selectedIngredients, ingredient]);
     }
   };
 
@@ -33,11 +34,11 @@ export const IngredientsOptions = () => {
         <FlexColumn gap={15}>
           {ingredients.map((ingredient) => (
             <Checkbox
-              disabled={isReachedMaxNumbersOfIngrediants && !isChecked(ingredient.id)}
-              checked={isChecked(ingredient.id)}
-              setChecked={() => selectIngredientsHandler(ingredient.id)}
+              disabled={isReachedMaxNumbersOfIngrediants && !isChecked(ingredient)}
+              checked={isChecked(ingredient)}
+              setChecked={() => selectIngredientsHandler(ingredient)}
               key={ingredient.id}>
-              <Label disabled={isReachedMaxNumbersOfIngrediants} checked={isChecked(ingredient.id)}>
+              <Label disabled={isReachedMaxNumbersOfIngrediants} checked={isChecked(ingredient)}>
                 {ingredient.name}
               </Label>
             </Checkbox>

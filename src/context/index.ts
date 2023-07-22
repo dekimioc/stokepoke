@@ -4,3 +4,4 @@ export * from './BaseContext';
 export * from './SauceContext';
 export * from './IngredientsContext';
 export * from './ExtraIngredientsContext';
+export * from './DishContext';

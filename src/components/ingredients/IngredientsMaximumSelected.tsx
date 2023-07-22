@@ -1,12 +1,17 @@
 import styled from 'styled-components/native';
-import { useIngredients } from '../../hooks/useIngredients';
+import { useIngredients, useSize } from '../../hooks';
+import { lowercaseString } from '../../utils';
 
 export const IngredientsMaximumSelected = () => {
   const { isReachedMaxNumbersOfIngrediants, maximumIngredientsPerSize } = useIngredients();
+  const {
+    selectedSize: { name },
+  } = useSize();
   const renderCondition = isReachedMaxNumbersOfIngrediants && maximumIngredientsPerSize > 0;
   return renderCondition ? (
     <StyledText>
-      <Star>*</Star> You've chosen the maximum amout of ingrediants for a medium size bowl.
+      <Star>*</Star>
+      {`You've chosen the maximum amout of ingrediants for a ${lowercaseString(name)} size bowl.`}
     </StyledText>
   ) : null;
 };

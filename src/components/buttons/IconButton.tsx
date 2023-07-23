@@ -3,23 +3,9 @@ import { TouchableOpacityProps } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 
 type IconButtonProps = {
-  iconHaveState?: boolean;
-  primaryIcon: React.ReactNode;
-  secondaryIcon?: React.ReactNode;
-  secondaryPress?: () => void;
+  icon?: React.ReactNode;
 } & TouchableOpacityProps;
 
-export const IconButton: FC<IconButtonProps> = ({
-  iconHaveState,
-  primaryIcon,
-  secondaryIcon,
-  secondaryPress,
-  onPress,
-  ...rest
-}) => {
-  return (
-    <TouchableOpacity onPress={secondaryIcon && iconHaveState ? secondaryPress : onPress} {...rest}>
-      {secondaryIcon && iconHaveState ? secondaryIcon : primaryIcon}
-    </TouchableOpacity>
-  );
+export const IconButton: FC<IconButtonProps> = ({ icon, ...rest }) => {
+  return <TouchableOpacity {...rest}>{icon}</TouchableOpacity>;
 };

@@ -1,17 +1,23 @@
 import styled from 'styled-components/native';
 import { ArrowDown, ArrowUp } from '../../../assets/svg';
-import { FlexRow } from '../layout';
+import { useCart } from '../../hooks';
+import { FC } from 'react';
+import { Cart } from '../../types';
 
-export const CartQuantity = () => {
+export const CartQuantity: FC<Cart> = (cartItem) => {
+  const { decreaseQuantity, increaseQuantity } = useCart();
   return (
     <Container>
-      <StyledTouchable position="left">
+      <StyledTouchable
+        disabled={cartItem.quantity === 1}
+        onPress={() => decreaseQuantity(cartItem)}
+        position="left">
         <ArrowDown />
       </StyledTouchable>
       <ValueContainer>
-        <Value>1</Value>
+        <Value>{cartItem.quantity}</Value>
       </ValueContainer>
-      <StyledTouchable position="right">
+      <StyledTouchable onPress={() => increaseQuantity(cartItem)} position="right">
         <ArrowUp />
       </StyledTouchable>
     </Container>

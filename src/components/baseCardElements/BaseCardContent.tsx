@@ -1,9 +1,9 @@
 import { FC, useCallback } from 'react';
-import { Dish } from '../../types';
+import { Cart, Dish } from '../../types';
 import { FlexColumn } from '../layout';
 import { BodyText } from '../typography';
 ``;
-export const BaseCardContent: FC<Dish> = (dish) => {
+export const BaseCardContent: FC<Dish | Cart> = (dish) => {
   const {
     size: { name: sizeName },
     base: { name: baseName },

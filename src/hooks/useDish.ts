@@ -15,7 +15,7 @@ export const useDish = () => {
   const { selectedIngredients } = useIngredients();
   const { selectedSauce } = useSauce();
   const { selectedSize } = useSize();
-  console.log(dish, 'dish');
+
   useEffect(() => {
     setDish({
       base: selectedBase,
@@ -37,6 +37,7 @@ export const useDish = () => {
   return useMemo(
     () => ({
       dish,
+      setDish,
     }),
     [dish]
   );

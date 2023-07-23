@@ -5,3 +5,4 @@ export * from './SauceContext';
 export * from './IngredientsContext';
 export * from './ExtraIngredientsContext';
 export * from './DishContext';
+export * from './CartContext';

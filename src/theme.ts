@@ -21,6 +21,7 @@ export const theme = {
   },
   lineHeights: {
     default: '24px',
+    small: '10px',
   },
   spacing: {
     spacing30: '30px',

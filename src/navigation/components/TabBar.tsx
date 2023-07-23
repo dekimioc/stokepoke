@@ -4,6 +4,7 @@ import { useTheme } from '../../hooks';
 import styled from 'styled-components/native';
 
 import { HomeIcon, FavouriteIcon, CartIcon } from '../../../assets/svg';
+import { CartItemsCounter, CartItemsIcon } from './CartItemsIcon';
 
 export const TabBar = ({ state, descriptors, navigation }: any) => {
   const { theme } = useTheme();
@@ -20,20 +21,18 @@ export const TabBar = ({ state, descriptors, navigation }: any) => {
             : route.name;
 
         const isFocused = state.index === index;
-
+        const iconColor = isFocused ? theme.colors.secondary : theme.colors.primary;
         let icon: React.ReactNode;
 
         switch (label) {
           case Navigators.Home:
-            icon = <HomeIcon color={isFocused ? theme.colors.secondary : theme.colors.primary} />;
+            icon = <HomeIcon color={iconColor} />;
             break;
           case Navigators.Favourites:
-            icon = (
-              <FavouriteIcon color={isFocused ? theme.colors.secondary : theme.colors.primary} />
-            );
+            icon = <FavouriteIcon color={iconColor} />;
             break;
           case Navigators.Cart:
-            icon = <CartIcon color={isFocused ? theme.colors.secondary : theme.colors.primary} />;
+            icon = <CartItemsIcon isFocused={isFocused} />;
             break;
         }
 

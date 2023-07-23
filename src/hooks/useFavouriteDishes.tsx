@@ -7,25 +7,37 @@ import { useIngredients } from './useIngredients';
 import { useSauce } from './useSauce';
 import { useSize } from './useSize';
 import { Dish } from '../types';
+import isEqual from 'lodash.isequal';
+var deepEqual = require('deep-equal');
 
 export const useFavouriteDishes = () => {
   const { favouriteDishes, setFavouriteDishes, selectedFavouriteDish, setSelectedFavouriteDish } =
     useContext(DishContext);
-  //   const { selectedBowl } = useBowls();
-  //   const { selectedExtraIngredients } = useExtraIngredients();
-  //   const { selectedIngredients } = useIngredients();
-  //   const { selectedSauce } = useSauce();
-  //   const { selectedSize } = useSize();
 
   const updateFavouritesDishes = (dish: Dish) => {
-    if (favouriteDishes.includes(dish)) {
-      setFavouriteDishes(favouriteDishes.filter((d) => d !== dish));
+    if (!!favouriteDishes.length) {
+      favouriteDishes.map((favourite) => {
+        if (isEqual(favourite, dish)) {
+          setFavouriteDishes(favouriteDishes.filter((d) => !isEqual(d, dish)));
+        } else {
+          setFavouriteDishes([...favouriteDishes, dish]);
+        }
+      });
     } else {
-      setFavouriteDishes([...favouriteDishes, dish]);
+      setFavouriteDishes([dish]);
     }
   };
 
-  useEffect(() => updateFavouritesDishes(selectedFavouriteDish), [selectedFavouriteDish]);
+  const deleteFavouriteDish = (dish: Dish) => {
+    favouriteDishes.map((favourite) => {
+      if (isEqual(favourite, dish)) {
+        setFavouriteDishes(favouriteDishes.filter((d) => !isEqual(d, dish)));
+      }
+    });
+  };
+
+  const isFavouriteDish = (dish: Dish) =>
+    favouriteDishes.map((favourite) => isEqual(favourite, dish));
 
   return useMemo(
     () => ({
@@ -33,7 +45,10 @@ export const useFavouriteDishes = () => {
       setFavouriteDishes,
       selectedFavouriteDish,
       setSelectedFavouriteDish,
+      updateFavouritesDishes,
+      deleteFavouriteDish,
+      isFavouriteDish,
     }),
-    [favouriteDishes, selectedFavouriteDish]
+    [favouriteDishes, selectedFavouriteDish, deleteFavouriteDish, updateFavouritesDishes]
   );
 };

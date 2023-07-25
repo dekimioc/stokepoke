@@ -1,4 +1,5 @@
-import { CompositeNavigationProp, NavigationProp, useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { CompositeNavigationProp, useFocusEffect, useNavigation } from '@react-navigation/native';
 import {
   DishCard,
   FlexColumn,
@@ -8,74 +9,58 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from '../components';
-import { useCart, useDish, useTheme } from '../hooks';
+import { useCart, useDish, useSteps, useTheme } from '../hooks';
 import {
   ButtonText,
-  CartStackParamList,
-  Dish,
-  FavouritesStackParamList,
-  HomeStackParamList,
-  Navigators,
+  CartScreenNavigationProps,
+  HomeScreenNavigationProps,
   Screens,
 } from '../types';
 import { useFavouriteDishes } from '../hooks/useFavouriteDishes';
-import { StackNavigationProp } from '@react-navigation/stack';
-import isEqual from 'lodash.isequal';
-import React, { useCallback, useState } from 'react';
 import { StarIcon } from '../../assets/svg';
-import { dishDefaults } from '../defaults';
 
 export const FourthStep = () => {
-  const { dish, setDish } = useDish();
-  const { setSelectedFavouriteDish, favouriteDishes, setFavouriteDishes, updateFavouritesDishes } =
-    useFavouriteDishes();
+  const { dish, useReset } = useDish();
+  const { updateFavouritesDishes, isFavouriteDish } = useFavouriteDishes();
   const { addToCart } = useCart();
   const { theme } = useTheme();
+  const { setCurrentStep } = useSteps();
 
-  type FourthStepProps = CompositeNavigationProp<
-    NavigationProp<HomeStackParamList>,
-    StackNavigationProp<FavouritesStackParamList>
-  >;
-  const navigation = useNavigation<FourthStepProps>();
+  useFocusEffect(() => {
+    setCurrentStep(4);
+  });
 
-  const [a, setA] = useState(true);
-  const iconsColorHandler = useCallback(() => {
-    let pathColor = '';
-    let color = '';
-
-    if (a) {
-      pathColor = theme.colors.primary;
-      color = theme.colors.background;
-    } else {
-      pathColor = theme.colors.background;
-      color = theme.colors.primary;
-    }
-    return { pathColor, color };
-  }, [a]);
+  const navigation =
+    useNavigation<CompositeNavigationProp<HomeScreenNavigationProps, CartScreenNavigationProps>>();
 
   const addToCartAndNavigate = () => {
     addToCart(dish);
     navigation.navigate({ name: Screens.FirstStep, key: Screens.FirstStep });
-    setDish(dishDefaults);
+    useReset();
+  };
+
+  const goToCheckout = () => {
+    addToCart(dish);
+    navigation.navigate({ name: Screens.Checkout, key: Screens.Checkout });
   };
 
   return (
     <Page progressBar>
       <DishCard />
-      <FlexColumn gap={15}>
+      <FlexColumn gap={15} marginBottom={50}>
         <FlexRow gap={15}>
           <IconButton
             onPress={() => updateFavouritesDishes(dish)}
             icon={
               <StarIcon
-                clipPath={iconsColorHandler().pathColor}
-                color={iconsColorHandler().color}
+                color={isFavouriteDish(dish) ? theme.colors.primary : theme.colors.transparent}
+                clipPath={isFavouriteDish(dish) ? theme.colors.background : theme.colors.primary}
               />
             }
           />
           <PrimaryButton text={ButtonText.cart} onPress={addToCartAndNavigate} />
         </FlexRow>
-        <SecondaryButton text={ButtonText.checkout} />
+        <SecondaryButton text={ButtonText.checkout} onPress={goToCheckout} />
       </FlexColumn>
     </Page>
   );

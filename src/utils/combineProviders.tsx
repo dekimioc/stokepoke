@@ -8,9 +8,11 @@ import {
   ExtraIngredientsProvider,
   DishProvider,
   CartProvider,
+  FavouriteDishProvider,
 } from '../context';
 import { ThemeProvider } from 'styled-components';
 import { useTheme } from '../hooks';
+import { FormikProvider } from 'formik';
 
 type Providers = [ComponentType<any>, ComponentProps<any>?][];
 
@@ -31,6 +33,7 @@ const { theme } = useTheme();
 
 export const AllProviders = combineProviders([
   [ThemeProvider, { theme }],
+  [FormikProvider],
   [BowlProvider],
   [SizeProvider],
   [BaseProvider],
@@ -39,4 +42,5 @@ export const AllProviders = combineProviders([
   [ExtraIngredientsProvider],
   [DishProvider],
   [CartProvider],
+  [FavouriteDishProvider],
 ]);

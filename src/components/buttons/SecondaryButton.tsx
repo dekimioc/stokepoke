@@ -1,10 +1,15 @@
 import styled from 'styled-components/native';
 import { ButtonProps } from '../../types';
 
-export const SecondaryButton: React.FC<ButtonProps> = ({ text, withIcon, ...rest }) => {
+export const SecondaryButton: React.FC<ButtonProps> = ({
+  text,
+  withIcon,
+  fontWeight = false,
+  ...rest
+}) => {
   return (
     <StyledButton {...rest}>
-      <ButtonText>{text}</ButtonText>
+      <ButtonText fontWeight={fontWeight}>{text}</ButtonText>
     </StyledButton>
   );
 };
@@ -21,11 +26,12 @@ const StyledButton = styled.TouchableOpacity(
 `
 );
 
-const ButtonText = styled.Text(
-  ({ theme }) => `
+const ButtonText = styled.Text<{ fontWeight?: boolean }>(
+  ({ theme, fontWeight }) => `
       color: ${theme.colors.primary};
       font-size: ${theme.fontSizes.default};
       line-height: ${theme.lineHeights.default};
-      letter-spacing: ${theme.letterSpacing.default}
+      letter-spacing: ${theme.letterSpacing.default};
+      font-weight: ${fontWeight ? theme.fontWeights.bold : theme.fontWeights.default};
   `
 );

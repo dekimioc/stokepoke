@@ -16,3 +16,7 @@ export * from './baseCardElements';
 export * from './favouritesCard';
 export * from './cartCard';
 export * from './EmptyMessage';
+export * from './checkoutForm';
+export * from './InformationalStar';
+export * from './orderSummaryCard';
+export * from './LocationCard';

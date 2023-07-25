@@ -1,10 +1,10 @@
 import { View } from 'react-native';
-import { Navigators, Screens } from '../../types';
+import { Navigators } from '../../types';
 import { useTheme } from '../../hooks';
 import styled from 'styled-components/native';
 
-import { HomeIcon, FavouriteIcon, CartIcon } from '../../../assets/svg';
-import { CartItemsCounter, CartItemsIcon } from './CartItemsIcon';
+import { HomeIcon, FavouriteIcon } from '../../../assets/svg';
+import { CartItemsIcon } from './CartItemsIcon';
 
 export const TabBar = ({ state, descriptors, navigation }: any) => {
   const { theme } = useTheme();

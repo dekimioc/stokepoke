@@ -7,11 +7,14 @@ export const theme = {
     backgroundPrimary: '#FAFBFF',
     transparent: 'transparent',
     gray: '#29283880',
+    grayLight: '#29283899',
+    semiTransparent: '#f8606033',
   },
   fontSizes: {
     big: '20px',
     body: '16px',
     default: '14px',
+    medium: '12px',
     small: '10px',
   },
   fontWeights: {
@@ -21,12 +24,18 @@ export const theme = {
   },
   lineHeights: {
     default: '24px',
+    body: '20px',
+    medium: '14px',
     small: '10px',
   },
   spacing: {
     spacing30: '30px',
+    spacing20: '20px',
     spacing15: '15px',
+    spacing12: '12px',
     spacing8: '8px',
+    spacing7: '7px',
+    spacing5: '5px',
     spacing0: '0',
   },
   borderRadius: {

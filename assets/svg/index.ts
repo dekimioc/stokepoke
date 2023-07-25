@@ -8,3 +8,7 @@ export * from './StarIcon';
 export * from './DeleteIcon';
 export * from './ArrowDown';
 export * from './ArrowUp';
+export * from './PinIcon';
+export * from './LogoIcon';
+export * from './HamburgerIcon';
+export * from './CloseIcon';

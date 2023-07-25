@@ -2,8 +2,8 @@ export const getFirstWord = (str: string) => {
   return str.split(' ')[0];
 };
 
-export const convertToTwoDecimals = (str: number) => {
-  return str.toFixed(2);
+export const convertToTwoDecimals = (num: number) => {
+  return num.toFixed(2);
 };
 
 export const lowercaseString = (str: string) => {

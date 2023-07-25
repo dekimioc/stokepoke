@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TabBar } from '../components';
-import { Navigators, Screens } from '../../types';
+import { BottomTabParamList, Navigators } from '../../types';
 import { CartNavigator } from './CartNavigator';
 import { HomeNavigator } from './HomeNavigator';
 import { FavouritesNavigator } from './FavouritesNavigator';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const sharedOptions = {
   headerShown: false,

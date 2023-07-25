@@ -9,6 +9,10 @@ type BaseContentType = {
   setSelectedBase: (arg: Base) => void;
   loading: boolean;
   error: string;
+  currentStep: number;
+  setCurrentStep: (arg: number) => void;
+  activeScreen: number;
+  setActiveScreen: (arg: number) => void;
 };
 
 export const BaseContext = createContext<BaseContentType>({
@@ -17,6 +21,10 @@ export const BaseContext = createContext<BaseContentType>({
   setSelectedBase: () => {},
   loading: false,
   error: '',
+  currentStep: 1,
+  setCurrentStep: () => {},
+  activeScreen: 1,
+  setActiveScreen: () => {},
 });
 
 export const BaseProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
@@ -24,6 +32,8 @@ export const BaseProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   const [selectedBase, setSelectedBase] = useState<Base>(baseDefaults);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [activeScreen, setActiveScreen] = useState<number>(1);
 
   const getBases = async () => {
     setLoading(true);
@@ -50,7 +60,18 @@ export const BaseProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
   }, []);
 
   return (
-    <BaseContext.Provider value={{ bases, selectedBase, setSelectedBase, loading, error }}>
+    <BaseContext.Provider
+      value={{
+        bases,
+        selectedBase,
+        setSelectedBase,
+        loading,
+        error,
+        currentStep,
+        setCurrentStep,
+        activeScreen,
+        setActiveScreen,
+      }}>
       {children}
     </BaseContext.Provider>
   );

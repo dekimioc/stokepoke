@@ -2,29 +2,33 @@ import { FC, useCallback } from 'react';
 import { Cart, Dish } from '../../types';
 import { FlexColumn } from '../layout';
 import { BodyText } from '../typography';
-``;
+import { useExtraIngredients, useIngredients } from '../../hooks';
+
 export const BaseCardContent: FC<Dish | Cart> = (dish) => {
   const {
     size: { name: sizeName },
     base: { name: baseName },
     sauce: { name: sauceName },
-    ingredients,
-    extraIngredient,
   } = dish;
 
+  const { selectedExtraIngredients } = useExtraIngredients();
+  const { selectedIngredients } = useIngredients();
+
   const getExtraIngredients = useCallback(() => {
-    if (!!extraIngredient.length) {
-      return extraIngredient.map((ingredient) => <BodyText text={ingredient.name} />);
+    if (!!selectedExtraIngredients.length) {
+      return selectedExtraIngredients.map((ingredient, i) => (
+        <BodyText key={`${ingredient.id}-${i}`} text={ingredient.name} />
+      ));
     }
-  }, [extraIngredient]);
+  }, [selectedExtraIngredients]);
 
   return (
     <FlexColumn marginBottom={20}>
-      <BodyText text={`${sizeName}`} />
+      <BodyText text={`${sizeName} size`} />
       <BodyText text={`${baseName}`} />
       <BodyText text={sauceName} />
       <BodyText
-        text={ingredients.map((ingredient, index) => (index ? ', ' : '') + ingredient.name)}
+        text={selectedIngredients.map((ingredient, index) => (index ? ', ' : '') + ingredient.name)}
       />
       {getExtraIngredients()}
     </FlexColumn>

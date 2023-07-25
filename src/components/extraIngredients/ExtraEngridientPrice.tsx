@@ -14,8 +14,8 @@ export const ExtraIngredientPrice = () => {
           <Header text={`$${convertToTwoDecimals(sizePrice)}`} />
         </FlexRow>
         <FlexRow justifyContent="space-between">
-          <BodyText text="Price with extra ingredients" />
-          <Header text={`$${convertToTwoDecimals(totalPrice)}`} />
+          <BodyText primary={false} text="Price with extra ingredients" />
+          <Header primary={false} text={`$${convertToTwoDecimals(totalPrice)}`} />
         </FlexRow>
       </FlexColumn>
     </Box>

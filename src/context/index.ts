@@ -6,3 +6,4 @@ export * from './IngredientsContext';
 export * from './ExtraIngredientsContext';
 export * from './DishContext';
 export * from './CartContext';
+export * from './FavouriteDishContext';

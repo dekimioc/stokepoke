@@ -43,7 +43,8 @@ const Container = styled.TouchableOpacity(
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${theme.spacing.spacing15}
+    gap: ${theme.spacing.spacing15};
+    padding-bottom: ${theme.spacing.spacing15};
 `
 );
 

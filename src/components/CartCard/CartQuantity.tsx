@@ -11,43 +11,42 @@ export const CartQuantity: FC<Cart> = (cartItem) => {
       <StyledTouchable
         disabled={cartItem.quantity === 1}
         onPress={() => decreaseQuantity(cartItem)}
-        position="left">
+        left>
         <ArrowDown />
       </StyledTouchable>
       <ValueContainer>
         <Value>{cartItem.quantity}</Value>
       </ValueContainer>
-      <StyledTouchable onPress={() => increaseQuantity(cartItem)} position="right">
+      <StyledTouchable onPress={() => increaseQuantity(cartItem)} left={false}>
         <ArrowUp />
       </StyledTouchable>
     </Container>
   );
 };
 
-const Container = styled.View(
-  ({ theme }) => `
-    display: flex;
-    flex-direction: row;
-`
-);
+const Container = styled.View`
+  display: flex;
+  flex-direction: row;
+`;
 
-const StyledTouchable = styled.TouchableOpacity<{ position: string }>(
-  ({ theme, position }) => `
+const StyledTouchable = styled.TouchableOpacity<{ left: boolean }>(
+  ({ theme, left }) => `
     width: 40px;
     height: 40px;
     background-color: ${theme.colors.thernary};
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: ${left ? '3px 0 0 3px' : '0 3px 3px 0'}
 `
 );
 
 const ValueContainer = styled.View(
   ({ theme }) => `
-min-width: 40px;
-display: flex;
-justify-content: center;
-border: 1px solid ${theme.colors.thernary};
+  min-width: 40px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid ${theme.colors.thernary};
 
 `
 );

@@ -1,14 +1,17 @@
 import { useCallback } from 'react';
-import { useSize, useIngredients } from '../../hooks';
+import { useSize, useIngredients, useFavouriteDishes } from '../../hooks';
 import { Loader } from '../Loader';
 import { Label, Radio } from '../inputs';
-import { FlexColumn } from '../layout';
 import { convertToTwoDecimals, getNumberOfIngredients } from '../../utils';
-import { Size } from '../../types';
+import { HomeStackParamList, Screens, Size } from '../../types';
+import { FlatList } from 'react-native';
+import { RouteProp, useRoute } from '@react-navigation/native';
 
 export const SizeOptions = () => {
   const { sizes, selectedSize, setSelectedSize, loading } = useSize();
   const { setMaximumIngredientsPerSize } = useIngredients();
+  const { params } = useRoute<RouteProp<HomeStackParamList, Screens.SecondStep>>();
+  const { setChangedFavouriteDish } = useFavouriteDishes();
 
   const isChecked = useCallback((id: string) => Boolean(selectedSize.id === id), [selectedSize]);
 
@@ -17,22 +20,38 @@ export const SizeOptions = () => {
     setMaximumIngredientsPerSize(getNumberOfIngredients(size.description).number);
   };
 
-  const renderSizes = useCallback(() => {
-    if (sizes) {
-      return sizes.map((size) => (
+  const trigerFunctionsHandler = useCallback(
+    (item: Size) => {
+      if (params) {
+        if (params.isFavouriteEdit) {
+          selectSizeHandler(item);
+          setChangedFavouriteDish('size', item);
+        }
+      } else {
+        selectSizeHandler(item);
+      }
+    },
+    [params, selectedSize]
+  );
+
+  return loading ? (
+    <Loader />
+  ) : (
+    <FlatList
+      scrollEnabled={false}
+      data={sizes}
+      renderItem={({ item }) => (
         <Radio
-          key={size.id}
-          setChecked={() => selectSizeHandler(size)}
-          checked={isChecked(size.id)}>
+          key={item.id}
+          setChecked={() => trigerFunctionsHandler(item)}
+          checked={isChecked(item.id)}>
           <Label
-            checked={isChecked(size.id)}
-            extraText={getNumberOfIngredients(size.description).text}>
-            {`${size.name} - ${size.currency}${convertToTwoDecimals(size.price)}`}
+            checked={isChecked(item.id)}
+            extraText={getNumberOfIngredients(item.description).text}>
+            {`${item.name} - ${item.currency}${convertToTwoDecimals(item.price)}`}
           </Label>
         </Radio>
-      ));
-    }
-  }, [sizes, selectedSize]);
-
-  return loading ? <Loader /> : <FlexColumn gap={15}>{renderSizes()}</FlexColumn>;
+      )}
+    />
+  );
 };

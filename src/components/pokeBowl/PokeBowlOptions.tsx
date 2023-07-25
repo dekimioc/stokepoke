@@ -1,40 +1,52 @@
-import { useCallback, useEffect } from 'react';
-import { useBowls } from '../../hooks';
+import { useCallback } from 'react';
+import { useBowls, useFavouriteDishes } from '../../hooks';
 import { Label, Radio } from '../inputs';
 import { getFirstWord } from '../../utils';
 import { Loader } from '../Loader';
-import { FlexColumn } from '../layout';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { HomeStackParamList } from '../../types';
+import { Bowl, HomeStackParamList, Screens } from '../../types';
+import { FlatList } from 'react-native-gesture-handler';
 
 export const PokeBowlOptions = () => {
-  const { params } = useRoute<RouteProp<HomeStackParamList>>();
   const { setSelectedBowl, selectedBowl, bowls, loading } = useBowls();
+  const { params } = useRoute<RouteProp<HomeStackParamList, Screens.FirstStep>>();
+  const { setChangedFavouriteDish } = useFavouriteDishes();
 
-  useEffect(() => {
-    if (params?.dish) {
-      setSelectedBowl(params.dish.bowl);
-    }
-  }, [params]);
+  const isChecked = useCallback(
+    (id: string) => Boolean(selectedBowl.id === id),
+    [selectedBowl, bowls]
+  );
 
-  const isChecked = useCallback((id: string) => Boolean(selectedBowl.id === id), [selectedBowl]);
+  const trigerFunctionsHandler = useCallback(
+    (item: Bowl) => {
+      if (params) {
+        if (!params.isFavouriteEdit) {
+          setSelectedBowl(item);
+        } else {
+          setSelectedBowl(item);
+          setChangedFavouriteDish('bowl', item);
+        }
+      } else {
+        setSelectedBowl(item);
+      }
+    },
+    [params, selectedBowl]
+  );
 
-  const renderBowls = useCallback(() => {
-    if (bowls) {
-      return (
-        <FlexColumn gap={15}>
-          {bowls.map((bowl) => (
-            <Radio
-              key={bowl.id}
-              setChecked={() => setSelectedBowl(bowl)}
-              checked={isChecked(bowl.id)}>
-              <Label checked={isChecked(bowl.id)}>{getFirstWord(bowl.name)}</Label>
-            </Radio>
-          ))}
-        </FlexColumn>
-      );
-    }
-  }, [bowls, selectedBowl]);
-
-  return loading ? <Loader /> : <>{renderBowls()}</>;
+  return loading ? (
+    <Loader />
+  ) : (
+    <FlatList
+      scrollEnabled={false}
+      data={bowls}
+      renderItem={({ item }) => (
+        <Radio
+          key={item.id}
+          setChecked={() => trigerFunctionsHandler(item)}
+          checked={isChecked(item.id)}>
+          <Label checked={isChecked(item.id)}>{getFirstWord(item.name)}</Label>
+        </Radio>
+      )}
+    />
+  );
 };

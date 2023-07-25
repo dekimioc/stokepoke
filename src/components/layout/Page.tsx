@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components/native';
 import { ProgressBar } from '../progresBar';
+import { useSteps } from '../../hooks';
 
 type PageProps = {
   progressBar?: boolean;
